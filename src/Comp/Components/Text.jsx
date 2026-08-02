@@ -1,15 +1,15 @@
 const TEXT = {
   header: {
     home: "الرئيسية",
-    about: "المسابقات الخاصة",
-    services: "الأولمبياد الوطني",
-    running: "المسابقات المتاحة",
-    login: "تسجيل الدخول",
+    about: "المسابقات الأخرى",
+    services: "الأولمبياد",
+    contact: "تواصل معنا",
+    login: "الإدارة",
   },
 
   home: {
-    title: "Welcome",
-    description: "Your content goes here.",
+    title: "المنصة الرئيسية",
+    description: "إدارة مسابقات العلوم والتقنية داخلية.",
   },
 
   footer: {

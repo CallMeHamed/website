@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import TEXT from "./Text.jsx";
+import FeatureShowcase from './FeatureShowcase';
 import AI from "../../Images/images.jpeg";
 import cybersecurity from "../../Images/cybersecurity.jpg";
 import robotic from "../../Images/robotics.jpeg";
@@ -129,6 +130,8 @@ function Home({ onSelectCategory }) {
                         </div>
                     ))}
                 </section>
+
+                <FeatureShowcase />
 
                 <div className="section-heading text-end mb-4">
                     <h2>الأقسام الرئيسية</h2>

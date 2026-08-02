@@ -71,8 +71,18 @@ function App() {
     setActivePage('home')
   }
 
+  const handleHomeClick = () => {
+    setSelectedCategory(null)
+    setActivePage('home')
+  }
+
+  const handleNavigate = (page) => {
+    setSelectedCategory(null)
+    setActivePage(page)
+  }
+
   const renderContent = () => {
-    if (selectedCategory) {
+    if (activePage === 'home' && selectedCategory) {
       return <WinnersPage category={selectedCategory} onBack={() => setSelectedCategory(null)} />
     }
 
@@ -137,11 +147,8 @@ function App() {
   return (
     <>
       <Header
-        onHomeClick={() => {
-          setSelectedCategory(null)
-          setActivePage('home')
-        }}
-        onNavigate={setActivePage}
+        onHomeClick={handleHomeClick}
+        onNavigate={handleNavigate}
       />
       {renderContent()}
       <Footer />

@@ -227,6 +227,186 @@ body {
   background: rgba(255, 255, 255, 0.24);
 }
 
+.feature-showcase {
+  position: relative;
+  padding: 40px 0 24px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.feature-showcase::before,
+.feature-showcase::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.feature-showcase::before {
+  z-index: 1;
+}
+
+.feature-showcase-shell {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+
+.feature-carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 2px;
+  background: transparent;
+  box-shadow: 0 28px 80px rgba(15,23,42,0.12);
+}
+
+.feature-track {
+  display: flex;
+  gap: 20px;
+  padding: 24px 0;
+  animation: featureCarousel 28s linear infinite;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.feature-carousel:hover .feature-track {
+  animation-play-state: paused;
+}
+
+.feature-card {
+  position: relative;
+  min-width: 320px;
+  max-width: 320px;
+  flex: 0 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.504);
+  border: 1px solid rgba(255,255,255,0.85);
+  box-shadow: 0 20px 60px rgba(15,23,42,0.12);
+  transform: perspective(1200px) rotateX(var(--tilt-x, 0)) rotateY(var(--tilt-y, 0));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  transform: perspective(1200px) rotateX(var(--tilt-x, 0)) rotateY(var(--tilt-y, 0)) scale(1.03);
+  box-shadow: 0 28px 90px rgba(15,23,42,0.18);
+}
+
+.feature-card-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.feature-card:hover .feature-card-image {
+  transform: scale(1.02);
+}
+
+.feature-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,23,42,0.03) 0%, rgba(15,23,42,0.24) 100%);
+  pointer-events: none;
+}
+
+.feature-card-content {
+  position: relative;
+  padding: 22px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 1;
+}
+
+.feature-card-pulse {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(59,130,246,0.9);
+  box-shadow: 0 0 30px rgba(59,130,246,0.28);
+}
+
+.feature-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.82);
+  color: #0f172a;
+  font-size: 1.15rem;
+  margin-bottom: 14px;
+}
+
+.feature-card-title {
+  margin: 0 0 0.65rem;
+  font-size: 1.25rem;
+  color: #0f172a;
+}
+
+.feature-card-text {
+  margin: 0;
+  color: #475569;
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+@keyframes featureCarousel {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (max-width: 992px) {
+  .feature-showcase {
+    padding: 28px 0 18px;
+  }
+
+  .feature-showcase-copy h2 {
+    font-size: 2rem;
+  }
+
+  .feature-track {
+    gap: 16px;
+    padding: 18px 0;
+  }
+
+  .feature-card {
+    min-width: 280px;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 576px) {
+  .feature-showcase-copy {
+    text-align: center;
+  }
+
+  .feature-showcase-copy p {
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    min-width: 260px;
+    max-width: 260px;
+  }
+}
+
 .section-heading {
   margin-top: 2rem;
 }
@@ -443,7 +623,7 @@ body {
 
 .winners-page {
   padding: 48px 0 72px;
-  text-align: left;
+  text-align: right;
 }
 
 .winners-back {
@@ -459,63 +639,75 @@ body {
   color: var(--text);
 }
 
-.winner-years {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.winners-message {
-  grid-column: 1 / -1;
-  text-align: center;
-}
-
 .winner-year,
 .future-winners {
   border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
+  border-radius: 16px;
   padding: 24px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
 }
 
-.winner-list {
-  display: grid;
-  gap: 12px;
-  padding: 0;
-  margin: 20px 0 0;
-  list-style: none;
+.winner-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
 }
 
-.winner-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 8px;
-  background: var(--social-bg);
+.winner-table th,
+.winner-table td {
+  border: 1px solid rgba(60, 137, 171, 0.18);
+  padding: 14px 12px;
+  text-align: center;
+  font-size: 0.95rem;
 }
 
-.winner-rank {
-  display: inline-flex;
-  width: 34px;
-  height: 34px;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  border-radius: 50%;
-  color: #fff;
-  background: #3C89AB;
+.winner-table th {
+  background: rgba(60, 137, 171, 0.14);
+  color: #0f172a;
   font-weight: 700;
 }
 
-.winner-item strong,
-.winner-item small {
-  display: block;
+.winner-table tbody tr:nth-child(even) {
+  background: rgba(60, 137, 171, 0.06);
 }
 
-.winner-item small {
-  color: var(--text);
+.winner-table caption {
+  caption-side: top;
+  text-align: right;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.winners-message {
+  text-align: center;
+}
+
+.future-winners {
+  margin-top: 28px;
+}
+
+.winner-form-group {
+  display: grid;
+  gap: 1rem;
+}
+
+.winner-form-group label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+.winner-form-group input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(60, 137, 171, 0.22);
+  padding: 0.85rem 0.95rem;
+}
+
+.future-winners button {
+  margin-top: 1rem;
 }
 
 .future-winners {

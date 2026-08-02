@@ -10,8 +10,8 @@ function Header({ onHomeClick, onNavigate }) {
     { key: 'home', label: TEXT.header.home, action: () => onHomeClick?.() },
     { key: 'about', label: TEXT.header.about, action: () => onNavigate?.('about') },
     { key: 'services', label: TEXT.header.services, action: () => onNavigate?.('services') },
-    { key: 'contact', label: TEXT.header.running, action: () => onNavigate?.('contact') },
-    { key: 'admin', label: 'الإدارة', action: () => onNavigate?.('admin') },
+    { key: 'contact', label: TEXT.header.contact, action: () => onNavigate?.('contact') },
+    { key: 'admin', label: TEXT.header.login, action: () => onNavigate?.('admin') },
   ];
 
   return (

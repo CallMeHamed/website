@@ -105,43 +105,50 @@ function WinnersPage({ category, onBack }) {
         <main className="winners-page">
             <div className="container">
                 <button className="btn btn-outline-secondary winners-back" type="button" onClick={onBack}>
-                    Back
+                    العودة
                 </button>
 
                 <header className="winners-header">
                     <h1>{category.title}</h1>
-                    <p>Top 6 winners for each year</p>
+                    <p>عرض الفائزين في جدول منسّق وفقًا للسنة والمركز</p>
                 </header>
 
-                <section className="winner-years">
-                    {isLoading && <p className="winners-message">Loading winners...</p>}
-                    {!isLoading && error && <p className="winners-message text-danger">{error}</p>}
-                    {!isLoading && !error && winnerYears.length === 0 && (
-                        <p className="winners-message">No winners saved yet.</p>
-                    )}
-                    {!isLoading && !error && winnerYears.map((yearGroup) => (
-                        <article className="winner-year" key={yearGroup.year}>
-                            <h2>{yearGroup.year}</h2>
-                            <ol className="winner-list">
+                {isLoading && <p className="winners-message">جارٍ تحميل النتائج...</p>}
+                {!isLoading && error && <p className="winners-message text-danger">{error}</p>}
+                {!isLoading && !error && winnerYears.length === 0 && (
+                    <p className="winners-message">لا توجد نتائج محفوظة حتى الآن.</p>
+                )}
+
+                {!isLoading && !error && winnerYears.map((yearGroup) => (
+                    <article className="winner-year" key={yearGroup.year}>
+                        <h2>عام {yearGroup.year}</h2>
+                        <table className="winner-table">
+                            <caption>الفائزون الأفضل</caption>
+                            <thead>
+                                <tr>
+                                    <th>الترتيب</th>
+                                    <th>اسم الطالب</th>
+                                    <th>المدرسة / الفريق</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 {yearGroup.winners.map((winner) => (
-                                    <li className="winner-item" key={winner.rank}>
-                                        <span className="winner-rank">{winner.rank}</span>
-                                        <span>
-                                            <strong>{winner.name}</strong>
-                                            <small>{winner.school}</small>
-                                        </span>
-                                    </li>
+                                    <tr key={`${yearGroup.year}-${winner.id}`}>
+                                        <td>{winner.rank}</td>
+                                        <td>{winner.name}</td>
+                                        <td>{winner.school}</td>
+                                    </tr>
                                 ))}
-                            </ol>
-                        </article>
-                    ))}
-                </section>
+                            </tbody>
+                        </table>
+                    </article>
+                ))}
 
                 <section className="future-winners">
-                    <h2>Submit Winners</h2>
+                    <h2>إضافة فائز</h2>
                     <form className="future-winners-form" onSubmit={handleSubmit}>
-                        <div>
-                            <label htmlFor="year">Year</label>
+                        <div className="winner-form-group">
+                            <label htmlFor="year">السنة</label>
                             <input
                                 className="form-control"
                                 id="year"
@@ -153,8 +160,8 @@ function WinnersPage({ category, onBack }) {
                             />
                         </div>
 
-                        <div>
-                            <label htmlFor="rank">Rank</label>
+                        <div className="winner-form-group">
+                            <label htmlFor="rank">الرتبة</label>
                             <input
                                 className="form-control"
                                 id="rank"
@@ -168,8 +175,8 @@ function WinnersPage({ category, onBack }) {
                             />
                         </div>
 
-                        <div>
-                            <label htmlFor="name">Winner Name</label>
+                        <div className="winner-form-group">
+                            <label htmlFor="name">اسم الفائز</label>
                             <input
                                 className="form-control"
                                 id="name"
@@ -181,8 +188,8 @@ function WinnersPage({ category, onBack }) {
                             />
                         </div>
 
-                        <div>
-                            <label htmlFor="school">School / Team</label>
+                        <div className="winner-form-group">
+                            <label htmlFor="school">المدرسة / الفريق</label>
                             <input
                                 className="form-control"
                                 id="school"
@@ -195,7 +202,7 @@ function WinnersPage({ category, onBack }) {
                         </div>
 
                         <button className="btn btn-primary" type="submit">
-                            Submit
+                            حفظ الفائز
                         </button>
                     </form>
 
